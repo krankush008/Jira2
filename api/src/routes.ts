@@ -10,7 +10,6 @@ export const attachPublicRoutes = (app: any): void => {
     app.delete('/test/reset-database', test.resetDatabase);
     app.post('/test/create-account', test.createAccount);
   }
-
   app.post('/authentication/guest', authentication.createGuestAccount);
 };
 

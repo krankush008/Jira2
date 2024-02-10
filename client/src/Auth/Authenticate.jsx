@@ -12,10 +12,12 @@ const Authenticate = () => {
   useEffect(() => {
     const createGuestAccount = async () => {
       try {
+        console.log('alaljdgfhghgvgfhfgfdhg');
         const { authToken } = await api.post('/authentication/guest');
         storeAuthToken(authToken);
         history.push('/');
       } catch (error) {
+        console.log('looloolooloolloloolooolo');
         toast.error(error);
       }
     };

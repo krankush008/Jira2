@@ -4,6 +4,7 @@ import history from 'browserHistory';
 import toast from 'shared/utils/toast';
 import { objectToQueryString } from 'shared/utils/url';
 import { getStoredAuthToken, removeStoredAuthToken } from 'shared/utils/authToken';
+import process from 'process';
 
 const defaults = {
   baseURL: process.env.API_URL || 'http://localhost:3000',
@@ -13,7 +14,8 @@ const defaults = {
   }),
   error: {
     code: 'INTERNAL_ERROR',
-    message: 'Something went wrong. Please check your internet connection or contact our support.',
+    message:
+      'Something went wrghfghong. Please check your internet connection or contact our support.',
     status: 503,
     data: {},
   },
@@ -30,17 +32,23 @@ const api = (method, url, variables) =>
       paramsSerializer: objectToQueryString,
     }).then(
       response => {
+        console.log('gor final ans');
         resolve(response.data);
       },
       error => {
+        console.log('gor final error');
+        console.log(JSON.stringify(error));
         if (error.response) {
           if (error.response.data.error.code === 'INVALID_TOKEN') {
             removeStoredAuthToken();
+            console.log('error1');
             history.push('/authenticate');
           } else {
+            console.log('error2');
             reject(error.response.data.error);
           }
         } else {
+          console.log('error3');
           reject(defaults.error);
         }
       },

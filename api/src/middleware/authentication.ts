@@ -6,6 +6,7 @@ import { User } from 'entities';
 
 export const authenticateUser = catchErrors(async (req, _res, next) => {
   const token = getAuthTokenFromRequest(req);
+  console.log('kudhfgdfhgiudrghdhrhr');
   if (!token) {
     throw new InvalidTokenError('Authentication token not found.');
   }

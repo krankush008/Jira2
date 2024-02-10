@@ -6,6 +6,7 @@ import useMergeState from 'shared/hooks/mergeState';
 import useDeepCompareMemoize from 'shared/hooks/deepCompareMemoize';
 
 const useQuery = (url, propsVariables = {}, options = {}) => {
+  console.log('hhhhh');
   const { lazy = false, cachePolicy = 'cache-first' } = options;
 
   const wasCalled = useRef(false);
@@ -21,7 +22,6 @@ const useQuery = (url, propsVariables = {}, options = {}) => {
     isLoading: !lazy && !canUseCache,
     variables: {},
   });
-
   const makeRequest = useCallback(
     newVariables => {
       const variables = { ...state.variables, ...(newVariables || {}) };
@@ -35,12 +35,15 @@ const useQuery = (url, propsVariables = {}, options = {}) => {
         mergeState({ variables });
       }
 
+      console.log('khan');
       api.get(url, apiVariables).then(
         data => {
           cache[url] = { data, apiVariables };
+          console.log('Gorai');
           mergeState({ data, error: null, isLoading: false });
         },
         error => {
+          console.log('gor error');
           mergeState({ error, data: null, isLoading: false });
         },
       );
